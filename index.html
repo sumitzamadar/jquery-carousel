@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+      <meta charset="utf-8">
+      <link rel="stylesheet" href="./carousel.css" />
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+      <script src="./carousel.js"></script>
+      <title>Carousel</title>
+  </head>
+  <body>
+    <div id="main">
+        <div>
+            <h3 class="carousel-header">Available Themes</h3>
+            <label>Themes</label>
+            <select id="themes_selector">
+                <option>Select</option>
+                <!-- <option value="RED">Red</option>
+                <option value="GREEN">Green</option> -->
+            </select>    
+        </div>
+
+        <h3 class="carousel-header">Image Carousel</h3>
+        <div class="js_carousel" id="carousel_one">
+            <ul class="carousel_items">
+                <li class="js-slide-item">
+                    <div class="slide-item-content">
+                        <img src="./assets/img1.jpeg" />
+                    </div>
+                </li>    
+                <li class="js-slide-item">
+                    <div class="slide-item-content">
+                        <img src="./assets/img2.jpg" />
+                    </div>
+                </li>   
+                <li class="js-slide-item">
+                    <div class="slide-item-content">
+                        <img src="./assets/img3.jpg" />
+                    </div>
+                </li>                                       
+            </ul>
+        </div>      
+        
+        <h3 class="carousel-header">Text Carousel</h3>
+        <div class="js_carousel" id="carousel_two">
+                <ul class="carousel_items">
+                    <li class="js-slide-item">
+                        <div class="slide-item-content">
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+                                Curabitur eu maximus leo, vitae ullamcorper sapien. 
+                                ulla non libero pulvinar, facilisis augue non, euismod enim. 
+                                Ut bibendum malesuada feugiat. Maecenas efficitur tellus eu euismod malesuada. 
+                                Cras in enim molestie, ultricies lectus in, porttitor eros. 
+                                Nulla ac quam elementum, aliquam turpis vitae, ultrices sapien. 
+                                Nullam at elementum eros, at facilisis velit.                        
+                        </div>
+                    </li>    
+                    <li class="js-slide-item">
+                        <div class="slide-item-content">
+                                Nullam ut condimentum ipsum. 
+                                Nulla et ipsum sed leo tristique efficitur sed viverra ipsum. 
+                                In cursus lacus ac rhoncus imperdiet. Aliquam purus velit, aliquet fermentum lorem nec, mollis sodales leo. 
+                                Maecenas hendrerit, nunc vel imperdiet iaculis, dui dolor tristique leo, et tincidunt quam enim semper erat. 
+                                Cras porta augue at cursus congue. Morbi efficitur velit mauris, eget ullamcorper eros sagittis tempus. 
+                                Duis at purus quis nunc congue dictum.
+                        </div>
+                    </li>   
+                    <li class="js-slide-item">
+                        <div class="slide-item-content">
+                                Nulla vel arcu neque. Vivamus id odio consectetur augue lobortis congue a congue felis. 
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. In et quam lectus. 
+                                Maecenas facilisis dui id feugiat vulputate. Vestibulum consectetur et arcu vitae tincidunt. 
+                                Sed porttitor facilisis erat, eu fringilla ex porttitor ut. Integer vel vestibulum justo. 
+                                Morbi elementum egestas turpis, at cursus nunc sodales quis. Vivamus hendrerit vestibulum tincidunt. 
+                                Nulla eu dolor vitae tellus sagittis gravida.
+                        </div>
+                    </li>                                       
+                </ul>
+            </div>          
+
+    </div>
+  </body>
+  <script type="text/javascript">
+    $(document).ready(function(){
+    
+        localStorage.setItem('themes', JSON.stringify([{ value: 'RED', name: 'Red'}, {value: 'GREEN', name: 'Green'}]));
+        var themes = JSON.parse(localStorage.getItem('themes'));
+
+        var themesSelector = $('#themes_selector');
+        for (var i=0; i<themes.length; i++) {
+            console.log(themes[i]);
+            themesSelector.append($('<option value="' + themes[i].value +'">' + themes[i].name+ '</option>'));
+        }
+
+        $('#themes_selector').change(function() {
+           var theme = $(this).val();
+           
+            switch(theme) {
+                case 'RED':
+                    $('#main').removeClass('theme-green').addClass('theme-red');
+                    break;
+
+                case 'GREEN':
+                    $('#main').removeClass('theme-red').addClass('theme-green');
+                    break;
+           }
+        });
+
+        $('#carousel_one').jsCarousel({ 
+            slideDuration: 500,
+            slideWidth: 400,
+            visibleItems: 1,
+        });
+
+        $('#carousel_two').jsCarousel({ 
+            slideDuration: 500,
+            slideWidth: 200,
+            visibleItems: 2,
+        });
+    });
+  </script>
+</html>
